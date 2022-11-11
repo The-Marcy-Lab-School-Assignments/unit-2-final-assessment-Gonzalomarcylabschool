@@ -124,6 +124,12 @@ Because when we store an array into a
   sum(1, 2, 10); // 13
   sum(5); // 5
   sum(100, 200, 800, 1, 1, 1); // 1103;
+  
+  function sum(...args){
+    let sum = 0;
+    for (let arg of args) sum += arg;
+    return sum;
+  }
   ```
 
 
@@ -139,7 +145,8 @@ Because when we store an array into a
   shoutOut();
   console.log(`The best designer in the room is ${theCreator}.`);
   ```
-
+When we declare `theCreator` at the beginning we are setting a global variable that has a global scope. This means that the variable is accessible to everything in the code. When `theCreator` is reassigned inside of the function it will have a global scope after it is invoked. Because JS uses lexical scope and we reassigned the same variable name it will use the global scope of the first declaration. 
+When we invoke the function it will log `The best designer in the room is peter.` first.  When we log the string interpolation with `theCreator`, it will have the value of "peter" because when the function was invoked it se the value to "peter". This is again because of the global scope this variable and lexical scope. 
 
 11. **What does the following code log? Why?**
   ```javascript
@@ -153,6 +160,14 @@ Because when we store an array into a
   shoutOut();
   console.log(`${theHustler} is also the hardest working person in the room.`);
   ```
+The code will log the following:
+```
+Paul is the hardest working person in the room.
+Laisha is also the hardest working person in the room.
+```
+When we declare `theHustler` at the beginning we are setting a global variable that has a global scope. This means that the variable is accessible to everything in the code. When `theHustler` is declared inside of the function it will have a block scope. Because JS uses lexical scope and we redeclare the same variable name it will not use the global scope of the first declaration. 
+When we invoke the function it will log `Paul is the hardest working person in the room.` first.  When we log the string interpolation with `theHustler` will have the value of "Laisha". This is again because of the global scope this variable has. 
+
 
 12. **What do we mean when we say that JavaScript passes variables _by value_?**
 
