@@ -3,6 +3,37 @@
 
 1. **What is hoisting? Describe how hoisting affects variable _and_ function declarations. Provide code snippets to illustrate hoisting for both.** 
 
+JavaScript Hoisting refers to the process whereby the interpreter appears to move the declaration of functions, variables or classes to the top of their scope, prior to execution of the code.
+
+The reason this happens because JavaScript runs in 2 phases: creation (compile) phase and the execution phase. During the creation phase the code will be compiled and store all of the functions and variable declared with the var keyword in memory to be able to access them in the code. This way during the execution phase It knows exactly where to refrence them.
+
+Any Declaration functions can be hiosted. This will allow them to be recognised anyhwhere in the scope of the entire code.  
+
+```js
+  //function scope example
+  myfunction(); //here the function will run due to hoisting. It is still at the the top of its scope. this will run
+  //myNestedFunction() this will not work because it is outside of it's scope.
+  function myfunction(){
+  	myNestedFunction();//This function is being hoisted inside of its scope it will and can run.
+    var x = 1;
+    console.log(x);//
+    function myNestedFunction(){
+      console.log(x);//
+    }
+  }
+  ```
+
+**Note**: arrow and expressions functions can't be hosited.
+
+Any variables declared with `var` would be hoisted as well, meaning the variable is defined through out its scope.This however, does not mean that it will carry its assigment when it is hoisted. The value of the assigment will only be avaiable after its assigment. It can then later in the code be reassigned.
+
+```js
+ //hoisting and global scope example
+   console.log(x); // will return undefinded. The program recognizes that this variables exists. 
+    var x = 5;
+    console.log(x); // will print 5.
+    x = 4; //the variable has been reassigned and will  print 4.
+  ```
 
 2. **Why does the following block of code throw an error?**
   ```javascript
@@ -16,7 +47,7 @@
 
   console.log(currentStatus);
   ```
-
+Due to the scope of variables declared with the let keyword, `currentStatus` can only be accessed inside of the block or the `{}`, that it's in. Because `console.log(currentStatus);` is outside of the scope of the variable it will return a reffrenceError.
 
 3. **Why does the following block of code NOT throw an error?**
   ```javascript
@@ -31,13 +62,22 @@
   console.log(currentStatus);
   ```
 
-
+Unlike the the `let` keyword, `var` is hiosted and has function scope. This allows the variable `currentStatus` to be accessable by the `console.log` can access the value stored.
 
 4. **In JavaScript, we can declare variables with `var`, `let`, and `const`. What are the differences between each? Be sure to comment on how each declaration impacts the _scope_, _reassignment_, and _hoisting_ of variables.**
 
+Before ES6, `var` was the only keyword avaible to declare variables in JavaScript. Any variables declared with `var` would be hoisted, meaning the variable is defined through out its scope. This happens because of the two phases JavaScript runs in.: creation (compile) phase and the execution phase. During the creation phase the code will be compiled and variable declared with the `var` keyword in memory to be able to access them in the code. This way during the execution phase It knows exactly where to refrence them. 
 
+This however, does not mean that it will carry its assigment when it is hoisted. The value of the assigment will only be avaiable after its assigment. It can then later in the code be reassigned.
 
+`var` is also effected by function scope. If you declare a variable with the keyword `var` in a function it will be avaiable for the entirety of the function. 
+  
+The problem with the `var` keyword is that it can be redeclared at anypoint. If you redeclare in a block, it will also be redeclared out side of the block.
+  
+Unlike `var`, `let` and `const` cannot be redeclared nor hoisted. This is thanks to the effect of block scope. When a `let` or `const` variable are declare inside of `{ }`(curly braces) better know as a block, they can only be accessed from inside of the the block. One of the added benifits of let is that it can still be reassigned just like the `var` keyword.
 
+ `const` is effected by block scope just like the `let` keyword. The main diffrences between `const` and `let` its abilty to be reassigned.  
+ 
 5. **What does the following code log? Explain why?**
   ```javascript
   let bestPlayer = {name: "Lebron James"};
@@ -45,7 +85,7 @@
   bestPlayer.name = "Kevin Durant";
   console.log(theGOAT.name);
   ```
-
+This code will output `Kevin Durant` to the console. This happens because objects are passed by reffrence. When we stored `bestPlayer` into `theGOAT` what was stored was the refrence of where in memory `bestPlayer` is stored, not the values of the object. When any cnages is made to `bestPlayer` it will be referenced by `theGOAT`.
 6. **What is the value of `b` after this code runs? Explain why this is the case.**
   ```javascript
   let a = 10;
