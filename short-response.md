@@ -85,7 +85,9 @@ Unlike `var`, `let` and `const` cannot be redeclared nor hoisted. This is thanks
   bestPlayer.name = "Kevin Durant";
   console.log(theGOAT.name);
   ```
+
 This code will output `Kevin Durant` to the console. This happens because objects are passed by reffrence. When we stored `bestPlayer` into `theGOAT` what was stored was the refrence of where in memory `bestPlayer` is stored, not the values of the object. When any cnages is made to `bestPlayer` it will be referenced by `theGOAT`.
+
 6. **What is the value of `b` after this code runs? Explain why this is the case.**
   ```javascript
   let a = 10;
@@ -96,6 +98,8 @@ This code will output `Kevin Durant` to the console. This happens because object
   console.log(b);
   ```
 
+The value of `b` will be 10. Where as objects in Javascript are passed by reffrence, primitive data types are passed by value, meaning that the values are copied and stored in their own space in memory from the orriginal variable. Any changes maded to `a` will not effect any variable that it's copied to. 
+
 7. **Where does the following code throw an error? What type of error? Why?**
   ```javascript
   const bffs = 'Enmanuel Laisha';
@@ -103,6 +107,7 @@ This code will output `Kevin Durant` to the console. This happens because object
 
   console.log(bffs);
   ```
+On the line with ` bffs = 'Enmanuel Laisha Cielo';` will be where you get an error. The reason being that variables with the `const` keyword cannot be reassigned. When you tried to reassign `bffs` it will trigger a typeError because it cannot be reassigned. 
 
 8. **Wait, why doesn't the code below throw an error?! 🧐 What does this demonstrate?**
   ```javascript
@@ -111,7 +116,7 @@ This code will output `Kevin Durant` to the console. This happens because object
 
   console.log(bffs);
   ```
-
+Because when we store an array into a  
 
 9. **What is the purpose of _rest parameters_? How do we use them? Explain how do they differ from the `arguments` object. Illustrate the use of rest parameters by writing a function that takes any number of integers as arguments and returns their sum.**
 
@@ -151,6 +156,32 @@ This code will output `Kevin Durant` to the console. This happens because object
 
 12. **What do we mean when we say that JavaScript passes variables _by value_?**
 
+Primitive data types are passed by value, meaning that the values are store in a single space in moemory. When they are copied to a new variables, they are copied from their location in memory and stored in their own space in memory from the original variable to the new variable. When we change the value to the orginal variable, it will not change the value in the variable where we copied its original value.
+```js
+  let x = 1; //this will be stored in location "a" in memory.
+  let y = x; //this will copy the value stored in location "a" and store it in the new location "b"
+  x = 2// this will change the value in location "a" leaving the value in location "b" unchanged.
+```
 
 13. **What does it mean to _pass by reference_? In what ways do arrays and objects appear to be passed by reference in JavaScript? Use a code snippet to demonstrate.**
 
+The when we create an object it will create a refrence to point to where the memory lives in memory.
+
+```js
+  const obj = { key: "value" }; // this has created a reference to location "a" in memory.
+```
+If we try to copy `obj` into another variable it will only copy the reference to location "a" and not the properties in the `obj`. 
+
+```js
+  const obj2 = obj// this has only stored the reference to location 
+  "a"
+```
+All change to the orginal object will be reflected when we use the variable we stored the reference of the first one. If we use the second variable to make change it will make changes to the object that was originally declared. This is happening because its referencing location "a" in memory.
+
+```js
+console.log(obj)// => { key: "value" }
+console.log(obj2) // => { key: "value" }
+obj.key = "values2";
+console.log(obj2)// => { key: "values2" }
+obj2.key = "this is the new value."
+console.log(obj)// => { key: "this is the new value" }
