@@ -116,7 +116,7 @@ On the line with ` bffs = 'Enmanuel Laisha Cielo';` will be where you get an err
 
   console.log(bffs);
   ```
-Because when we store an array into a  
+Because when we store an array into a variable it will store the refrence of where in memory it is storing the heap that contains the values of the array. We can add and remove elemtns from an array because we are not trying to cnage the refrences of the heap that it has stored.
 
 9. **What is the purpose of _rest parameters_? How do we use them? Explain how do they differ from the `arguments` object. Illustrate the use of rest parameters by writing a function that takes any number of integers as arguments and returns their sum.**
 
@@ -131,6 +131,7 @@ Because when we store an array into a
     return sum;
   }
   ```
+  The rest paramet allows to pass through as many arguments that we need to our function (with in the limitation of JavaScript). It works by using the spread operater, which creates an array of the arguments that are passed thorught.. `arguments` objects is an array-like variable that lives within all functions that allows you to acces all of the arugments passed into the functions.
 
 
 10. **What does the following code log? Why?**
