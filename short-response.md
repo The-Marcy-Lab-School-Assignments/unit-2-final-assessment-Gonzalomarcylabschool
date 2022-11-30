@@ -181,18 +181,20 @@ Primitive data types are passed by value, meaning that the values are store in a
 
 13. **What does it mean to _pass by reference_? In what ways do arrays and objects appear to be passed by reference in JavaScript? Use a code snippet to demonstrate.**
 
-The when we create an object it will create a refrence to point to where the memory lives in memory.
+When we create an object it will create a refrence point to where the data lives in memory.
 
 ```js
-  const obj = { key: "value" }; // this has created a reference to location "a" in memory.
+  const obj = { key: "value" }; // This has created a reference to the location in memory with an address of #fffc11.
 ```
-If we try to copy `obj` into another variable it will only copy the reference to location "a" and not the properties in the `obj`. 
+
+If we try to copy `obj` into another variable it will only copy the address of where its located in memory, #fffc11, and not the properties in `obj`. 
 
 ```js
-  const obj2 = obj// this has only stored the reference to location 
+  const obj2 = obj// "obj2" has only stored the address of "obj" and not the properties inside. 
   "a"
 ```
-All change to the orginal object will be reflected when we use the variable we stored the reference of the first one. If we use the second variable to make change it will make changes to the object that was originally declared. This is happening because its referencing location "a" in memory.
+
+All change to the orginal object, `obj` will be reflected when we use the variable `obj2` to change the values of the properties. If we use the second variable to make change it will make changes to the object that was originally declared. This is happening because its referencing location "a" in memory.
 
 ```js
 console.log(obj)// => { key: "value" }
